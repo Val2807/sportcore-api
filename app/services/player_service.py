@@ -56,5 +56,23 @@ def create_player(
         return new_player
 
 
-def delete_player():
-    pass
+def delete_player(
+    session: Session,
+    first_name: str,
+    last_name: str,
+    birth_date: date,
+    team_id: int,
+):
+    existing = get_player(
+        session=session,
+        first_name=first_name,
+        last_name=last_name,
+        birth_date=birth_date,
+        team_id=team_id,
+    )
+
+    if not existing:
+        return None
+    session.delete(existing)
+    session.commit()
+    return existing
