@@ -76,3 +76,27 @@ def delete_player(
     session.delete(existing)
     session.commit()
     return existing
+
+
+def update_player_weight(
+        session: Session,
+        first_name: str,
+        last_name: str,
+        birth_date: date,
+        team_id: int,
+        weight: float,
+):
+    existing = get_player(
+        session=session,
+        first_name=first_name,
+        last_name=last_name,
+        birth_date=birth_date,
+        team_id=team_id,
+    )
+    if not existing:
+        return None
+    else:
+        existing.weight = weight
+        session.commit()
+
+        return existing
