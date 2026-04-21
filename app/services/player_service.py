@@ -100,3 +100,18 @@ def update_player_weight(
         session.commit()
 
         return existing
+
+
+def serialize_player(player: Player) -> dict:
+    return {
+        "first_name": player.first_name,
+        "last_name": player.last_name,
+        "birth_date": str(player.birth_date),
+        "team_id": player.team_id,
+        "weight": player.weight,
+    }
+
+
+def get_all_players(session: Session):
+    players = session.query(Player).all()
+    return [serialize_player(player) for player in players]
