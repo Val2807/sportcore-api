@@ -22,6 +22,14 @@ team_id = 1
 position = "forward"
 weight = 60.5
 
+first_name = "Vale"
+last_name = "Denisov"
+birth_date = date(2000, 6, 4)
+team_id = 2
+position = "forward"
+weight = 90.5
+
+
 player = create_player(session, first_name, last_name,
                        birth_date, team_id, position, weight)
 
