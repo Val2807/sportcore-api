@@ -7,6 +7,14 @@ Base.metadata.create_all(bind=engine)
 
 session = SessionLocal()
 
+
+first_name = "Vale"
+last_name = "Denisov"
+birth_date = date(2000, 6, 4)
+team_id = 2
+position = "forward"
+weight = 90.5
+
 first_name = "Ivan"
 last_name = "Ivanov"
 birth_date = date(2008, 5, 1)
