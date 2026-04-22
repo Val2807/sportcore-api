@@ -1,6 +1,6 @@
 from datetime import date
 from app.db import engine, Base, SessionLocal
-from app.services.player_service import create_player, get_player, delete_player, update_player_weight
+from app.services.player_service import create_player, get_player, delete_player, update_player_weight, get_all_players
 
 
 Base.metadata.create_all(bind=engine)
@@ -12,7 +12,15 @@ last_name = "Ivanov"
 birth_date = date(2008, 5, 1)
 team_id = 1
 position = "forward"
-weight = 55.4
+weight = 60.5
+
+first_name = "Vale"
+last_name = "Denisov"
+birth_date = date(2000, 6, 4)
+team_id = 2
+position = "forward"
+weight = 90.5
+
 
 player = create_player(session, first_name, last_name,
                        birth_date, team_id, position, weight)
@@ -47,3 +55,7 @@ if updated_player:
 
 else:
     print("Cannot update weight: player not found")
+
+
+list_players = get_all_players(session)
+print(list_players)
