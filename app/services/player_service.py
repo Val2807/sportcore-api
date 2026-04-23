@@ -104,6 +104,7 @@ def update_player_weight(
 
 def serialize_player(player: Player) -> dict:
     return {
+        "id": player.id,
         "first_name": player.first_name,
         "last_name": player.last_name,
         "birth_date": str(player.birth_date),
@@ -115,3 +116,7 @@ def serialize_player(player: Player) -> dict:
 def get_all_players(session: Session):
     players = session.query(Player).all()
     return [serialize_player(player) for player in players]
+
+
+def get_player_by_id(session: Session, player_id: int):
+    return session.query(Player).filter(Player.id == player_id).first()
