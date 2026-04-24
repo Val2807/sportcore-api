@@ -8,3 +8,7 @@ class PlayerCreate(BaseModel):
     team_id: int
     weight: float | None = None
     position: str | None = None
+
+
+class PlayerWeightUpdate(BaseModel):
+    weight: float

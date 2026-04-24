@@ -120,3 +120,14 @@ def get_all_players(session: Session):
 
 def get_player_by_id(session: Session, player_id: int):
     return session.query(Player).filter(Player.id == player_id).first()
+
+
+def update_player_weight_by_id(session: Session, player_id: int, weight: float,):
+    player = get_player_by_id(session, player_id)
+    if not player:
+        return None
+
+    player.weight = weight
+    session.commit()
+
+    return player
