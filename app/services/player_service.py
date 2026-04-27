@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app.models.player import Player
 
 
-def get_player(
+def get_player_by_identity_fields(
     session: Session,
     first_name: str,
     last_name: str,
@@ -31,7 +31,7 @@ def create_player(
         team_id: int,
         position: str | None = None,
         weight: float | None = None):
-    existing = get_player(
+    existing = get_player_by_identity_fields(
         session=session,
         first_name=first_name,
         last_name=last_name,
@@ -54,52 +54,6 @@ def create_player(
         session.commit()
 
         return new_player
-
-
-def delete_player(
-    session: Session,
-    first_name: str,
-    last_name: str,
-    birth_date: date,
-    team_id: int,
-):
-    existing = get_player(
-        session=session,
-        first_name=first_name,
-        last_name=last_name,
-        birth_date=birth_date,
-        team_id=team_id,
-    )
-
-    if not existing:
-        return None
-    session.delete(existing)
-    session.commit()
-    return existing
-
-
-def update_player_weight(
-        session: Session,
-        first_name: str,
-        last_name: str,
-        birth_date: date,
-        team_id: int,
-        weight: float,
-):
-    existing = get_player(
-        session=session,
-        first_name=first_name,
-        last_name=last_name,
-        birth_date=birth_date,
-        team_id=team_id,
-    )
-    if not existing:
-        return None
-    else:
-        existing.weight = weight
-        session.commit()
-
-        return existing
 
 
 def serialize_player(player: Player) -> dict:
