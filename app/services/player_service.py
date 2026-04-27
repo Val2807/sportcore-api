@@ -118,11 +118,18 @@ def get_all_players(session: Session):
     return [serialize_player(player) for player in players]
 
 
-def get_player_by_id(session: Session, player_id: int):
+def get_player_by_id(
+    session: Session,
+    player_id: int
+):
     return session.query(Player).filter(Player.id == player_id).first()
 
 
-def update_player_weight_by_id(session: Session, player_id: int, weight: float,):
+def update_player_weight_by_id(
+        session: Session,
+        player_id: int,
+        weight: float,
+):
     player = get_player_by_id(session, player_id)
     if not player:
         return None
