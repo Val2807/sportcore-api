@@ -1,12 +1,12 @@
 from datetime import date
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from fastapi import HTTPException
 
 from app.api.schemas import PlayerCreate, PlayerWeightUpdate
 from app.db import SessionLocal
 
-from app.services.player_service import create_player, get_all_players, get_player_by_id, serialize_player, update_player_weight, update_player_weight_by_id
+from app.services.player_service import create_player, get_all_players, get_player_by_id, serialize_player, update_player_weight_by_id, delete_player_by_id
 
 
 app = FastAPI()
@@ -90,3 +90,16 @@ def update_player_weight_endpoint(player_id: int, data: PlayerWeightUpdate):
         raise HTTPException(status_code=404, detail="Player not found")
 
     return serialize_player(updated_player)
+
+
+@app.delete("/players/{player_id}")
+def delete_player_by_id_endpoint(player_id: int):
+    session = SessionLocal()
+
+    deleted_player = delete_player_by_id(
+        session=session,
+        player_id=player_id
+    )
+    if not deleted_player:
+        raise HTTPException(status_code=404, detail="Player not found")
+    return Response(status_code=204)

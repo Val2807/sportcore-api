@@ -92,3 +92,13 @@ def update_player_weight_by_id(
     session.commit()
 
     return player
+
+
+def delete_player_by_id(session, player_id):
+    player = get_player_by_id(session, player_id)
+    if not player:
+        return None
+
+    session.delete(player)
+    session.commit()
+    return player
