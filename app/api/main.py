@@ -4,7 +4,7 @@ from fastapi import FastAPI, Response, HTTPException, Depends
 
 
 from app.api.schemas import PlayerCreate, PlayerWeightUpdate
-from app.db import SessionLocal, get_db
+from app.db import get_db
 
 from app.services.player_service import create_player, get_all_players, get_player_by_id, serialize_player, update_player_weight_by_id, delete_player_by_id
 
