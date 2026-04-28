@@ -58,24 +58,6 @@ def get_player_by_id_endpoint(player_id: int):
     return serialize_player(found_player_by_id)
 
 
-# @app.patch("/players/{player_id}/weight")
-# def update_player_weight_endpoint(player_id: int, data: PlayerWeightUpdate):
-#     session = SessionLocal()
-#     found_player_by_id = get_player_by_id(session, player_id)
-#     if not found_player_by_id:
-#         raise HTTPException(status_code=404, detail="Player not found")
-#     updated_player = update_player_weight(
-#         session=session,
-#         first_name=found_player_by_id.first_name,
-#         last_name=found_player_by_id.last_name,
-#         birth_date=found_player_by_id.team_id,
-#         team_id=found_player_by_id.team_id,
-#         weight=data.weight,
-#     )
-
-#     return serialize_player(updated_player)
-
-
 @app.patch("/players/{player_id}/weight")
 def update_player_weight_endpoint(player_id: int, data: PlayerWeightUpdate):
     session = SessionLocal()

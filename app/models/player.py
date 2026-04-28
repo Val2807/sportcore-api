@@ -21,13 +21,3 @@ class Player(Base):
 
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow)
-
-
-# class Player:
-#     def __init__(self, first_name, last_name, birth_date, team_id, position=None, weight=None):
-#         self.first_name = first_name
-#         self.last_name = last_name
-#         self.birth_date = birth_date
-#         self.position = position
-#         self.team_id = team_id
-#         self.weight = weight
