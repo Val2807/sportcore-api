@@ -12,3 +12,13 @@ class PlayerCreate(BaseModel):
 
 class PlayerWeightUpdate(BaseModel):
     weight: float
+
+
+class PlayerResponse(BaseModel):
+    id: int
+    first_name: str
+    last_name: str
+    birth_date: str
+    team_id: int
+    weight: float | None = None
+    position: str | None = None
