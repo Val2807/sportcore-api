@@ -1,17 +1,17 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class PlayerCreate(BaseModel):
-    first_name: str
-    last_name: str
+    first_name: str = Field(min_length=1)
+    last_name: str = Field(min_length=1)
     birth_date: str
-    team_id: int
-    weight: float | None = None
+    team_id: int = Field(gt=0)
+    weight: float = Field(gt=0)
     position: str | None = None
 
 
 class PlayerWeightUpdate(BaseModel):
-    weight: float
+    weight: float = Field(gt=0)
 
 
 class PlayerResponse(BaseModel):

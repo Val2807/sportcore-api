@@ -64,6 +64,7 @@ def serialize_player(player: Player) -> dict:
         "birth_date": str(player.birth_date),
         "team_id": player.team_id,
         "weight": player.weight,
+        "position": player.position
     }
 
 
