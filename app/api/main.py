@@ -20,8 +20,16 @@ def root():
 
 
 @app.get("/players", response_model=list[PlayerResponse])
-def get_players(db: Session = Depends(get_db)):
-    players = get_all_players(db)
+def get_players(
+    team_id: int | None = None,
+    position: str | None = None,
+    db: Session = Depends(get_db)
+):
+    players = get_all_players(
+        session=db,
+        team_id=team_id,
+        position=position
+    )
     return players
 
 

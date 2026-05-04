@@ -68,8 +68,21 @@ def serialize_player(player: Player) -> dict:
     }
 
 
-def get_all_players(session: Session):
-    players = session.query(Player).all()
+def get_all_players(
+        session: Session,
+        team_id: int | None = None,
+        position: str | None = None,
+):
+    query = session.query(Player)
+
+    if team_id is not None:
+        query = query.filter(Player.team_id == team_id)
+
+    if position is not None:
+        query = query.filter(Player.position == position)
+
+    players = query.all()
+
     return [serialize_player(player) for player in players]
 
 
