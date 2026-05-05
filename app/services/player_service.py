@@ -72,6 +72,8 @@ def get_all_players(
         session: Session,
         team_id: int | None = None,
         position: str | None = None,
+        limit: int = 4,
+        offset: int = 0
 ):
     query = session.query(Player)
 
@@ -80,6 +82,8 @@ def get_all_players(
 
     if position is not None:
         query = query.filter(Player.position == position)
+
+    query = query.limit(limit).offset(offset)
 
     players = query.all()
 
