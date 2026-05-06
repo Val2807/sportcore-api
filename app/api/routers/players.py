@@ -2,7 +2,7 @@ from datetime import date
 
 from fastapi import APIRouter, Response, HTTPException, Depends
 
-from app.api.schemas import PlayerCreate, PlayerWeightUpdate, PlayerResponse
+from app.api.schemas import PlayerCreate, PlayerWeightUpdate, PlayerResponse, PlayersListResponse
 from app.db import get_db
 
 from app.services.player_service import create_player, get_all_players, get_player_by_id, serialize_player, update_player_weight_by_id, delete_player_by_id
@@ -12,7 +12,7 @@ from sqlalchemy.orm import Session
 router = APIRouter(prefix="/players", tags=["players"])
 
 
-@router.get("/", response_model=list[PlayerResponse])
+@router.get("/", response_model=list[PlayersListResponse])
 def get_players(
     team_id: int | None = None,
     position: str | None = None,

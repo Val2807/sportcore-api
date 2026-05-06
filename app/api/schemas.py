@@ -22,3 +22,8 @@ class PlayerResponse(BaseModel):
     team_id: int
     weight: float | None = None
     position: str | None = None
+
+
+class PlayersListResponse(BaseModel):
+    total: int
+    items: list[PlayerResponse]
