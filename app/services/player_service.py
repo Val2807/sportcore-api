@@ -1,5 +1,6 @@
 from datetime import date
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 
 from app.models.player import Player
 
@@ -74,6 +75,7 @@ def get_all_players(
         position: str | None = None,
         limit: int = 4,
         offset: int = 0,
+        search: str | None = None,
 ):
     query = session.query(Player)
 
@@ -84,6 +86,15 @@ def get_all_players(
         query = query.filter(Player.position == position)
 
     total = query.count()
+
+    if search:
+        search_pattern = f"%{search}%"
+        query = query.filter(
+            or_(
+                Player.first_name.ilike(search_pattern),
+                Player.last_name.ilike(search_pattern),
+            )
+        )
 
     query = query.limit(limit).offset(offset)
 
