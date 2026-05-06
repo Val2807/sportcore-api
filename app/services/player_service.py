@@ -73,7 +73,7 @@ def get_all_players(
         team_id: int | None = None,
         position: str | None = None,
         limit: int = 4,
-        offset: int = 0
+        offset: int = 0,
 ):
     query = session.query(Player)
 
@@ -83,11 +83,16 @@ def get_all_players(
     if position is not None:
         query = query.filter(Player.position == position)
 
+    total = query.count()
+
     query = query.limit(limit).offset(offset)
 
     players = query.all()
 
-    return [serialize_player(player) for player in players]
+    return {
+        "total": total,
+        "items": [serialize_player(player) for player in players]
+    }
 
 
 def get_player_by_id(
