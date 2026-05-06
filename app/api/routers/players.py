@@ -12,7 +12,7 @@ from sqlalchemy.orm import Session
 router = APIRouter(prefix="/players", tags=["players"])
 
 
-@router.get("/", response_model=list[PlayersListResponse])
+@router.get("/", response_model=PlayersListResponse)
 def get_players(
     team_id: int | None = None,
     position: str | None = None,
